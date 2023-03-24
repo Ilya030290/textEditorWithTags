@@ -1,0 +1,40 @@
+@import '/src/styles/variables';
+@import '/src/styles/mixins';
+
+.tagsContainer {
+  @include size(90%, none);
+  @include flex(row, none, none, wrap);
+  margin-top: 40px;
+
+  & .tag {
+    @include minSize(15%, 4vh);
+    margin: 20px 20px;
+    padding: 10px;
+    border: 1px solid $lightGray;
+    border-radius: 5px;
+
+    & .tagDescription {
+      @include flex(row, space-between, center, nowrap);
+
+      & .tagTitle {
+        margin: 2px 0;
+        padding: 3px 8px;
+        background-color: $lightGreen;
+        border-radius: 5px;
+        font-size: medium;
+        font-weight: 500;
+      }
+
+      & .deleteButton {
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: inherit;
+
+        & img {
+          @include size(20px, 20px);
+        }
+      }
+    }
+  }
+}
