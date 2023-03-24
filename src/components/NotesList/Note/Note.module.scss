@@ -1,0 +1,61 @@
+@import '/src/styles/variables';
+@import '/src/styles/mixins';
+
+.noteContainer {
+  @include minSize(none, 3vh);
+  @include flex(column, none, none, nowrap);
+  margin: 10px 0;
+  padding: 15px;
+  border: 1px solid $lightGray;
+  border-radius: 5px;
+  background-color: $darkWhite;
+  box-shadow: rgba(50, 50, 93, 0.25) 0 1px 4px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+  & .description {
+    @include flex(row, space-between, none, nowrap);
+
+    & .title {
+      @include size(80%, none);
+      font-weight: 500;
+      font-size: medium;
+
+      & .activeSpan {
+        margin: 0 4px;
+        background-color: $yellow;
+      }
+
+      & .span {
+        margin: 0 4px;
+      }
+    }
+
+    & .buttonGroup {
+      @include flex(row, space-evenly, start, nowrap);
+      @include size(15%, none);
+
+      & .button {
+        @include size(30px, 30px);
+        padding: 2px;
+        border: none;
+        cursor: pointer;
+        background-color: inherit;
+
+        & img {
+          @include size(20px, 20px);
+        }
+      }
+    }
+  }
+
+  & .tagGroup {
+    @include size(100%, none);
+
+    & .tag {
+      background-color: $lightBlue;
+      margin-right: 10px;
+      padding: 6px;
+      border-radius: 5px;
+      font-weight: 500;
+    }
+  }
+}

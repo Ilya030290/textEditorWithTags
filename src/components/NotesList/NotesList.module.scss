@@ -1,0 +1,6 @@
+@import '/src/styles/mixins';
+
+.notesListContainer {
+  @include flex(column, none, none, nowrap);
+  @include size(90%, none);
+}
