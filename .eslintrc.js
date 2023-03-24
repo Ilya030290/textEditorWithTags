@@ -99,7 +99,7 @@ module.exports = {
           },
         ],
         'import/first': ['error'],
-        'react/no-array-index-key': ['warn'],
+        'react/no-array-index-key': ['off'],
         'react/jsx-uses-react': ['off'],
         'react/react-in-jsx-scope': ['off'],
         'padding-line-between-statements': [
@@ -131,7 +131,7 @@ module.exports = {
         'plugin:array-func/all',
         'prettier',
         'react-app',
-        'react-app/jest'
+        'react-app/jest',
       ],
       plugins: ['react', '@typescript-eslint', 'prettier'],
     },
