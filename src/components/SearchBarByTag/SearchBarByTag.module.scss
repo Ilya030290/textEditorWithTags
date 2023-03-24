@@ -1,0 +1,32 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.searchBarContainer {
+  @include flex(row, space-evenly, start, nowrap);
+  @include size(70%, 5vh);
+  margin: 40px 0;
+
+  & .searchInput {
+    @include size(70%, none);
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+
+  & .searchButton {
+    padding: 8px;
+    color: $white;
+    background-color: $lightGray;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $lightBlue;
+    }
+
+    & img {
+      @include size(20px, 20px);
+    }
+  }
+}
