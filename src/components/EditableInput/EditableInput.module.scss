@@ -1,0 +1,32 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.container {
+  @include flex(column, none, none, nowrap);
+  @include size(100%, none);
+
+  & .wrapper {
+    @include flex(row, space-between, none, nowrap);
+
+    & .editableInput {
+      @include size(70%, none);
+      padding: 10px;
+      border: 1px solid $smokeGray;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    & .saveButton {
+      @include size(40px, 40px);
+      margin-right: 15%;
+      padding: 5px;
+      border: none;
+      cursor: pointer;
+      background-color: inherit;
+
+      & img {
+        @include size(30px, 30px);
+      }
+    }
+  }
+}
