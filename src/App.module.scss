@@ -1,0 +1,18 @@
+@import '/src/styles/variables';
+@import '/src/styles/mixins';
+
+.wrapper {
+  @include flex(row, center, center, nowrap);
+  @include minSize(100vw, 100vh);
+  background-color: $darkWhite;
+
+  & .notesList {
+    @include flex(column, start, center, nowrap);
+    @include minSize(50%, 80vh);
+    margin: 20px 0;
+    padding: 30px;
+    background-color: $white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 5px;
+  }
+}
