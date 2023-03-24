@@ -1,0 +1,29 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.headerContainer {
+  @include flex(row, space-between, center, nowrap);
+  @include size(90%, 10vh);
+
+  & textarea {
+    @include size(80%, 100%);
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+
+  & .headerButton {
+    @include size(12%, 70%);
+    padding: 0 12px;
+    color: $white;
+    background-color: $festiveGreen;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+  }
+
+  & .disabledButton {
+    background-color: $polarGray;
+    cursor: not-allowed;
+  }
+}
