@@ -1,0 +1,17 @@
+@mixin flex($direction, $justifyContent, $alignItems, $wrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+  flex-wrap: $wrap;
+}
+
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin minSize($width, $height) {
+  min-width: $width;
+  min-height: $height;
+}
