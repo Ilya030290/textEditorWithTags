@@ -9,7 +9,7 @@ const initialState: AppState = {
   data: [],
   tags: [],
   allUniqueTags: [],
-  jsonData: '',
+  jsonData: JSON.stringify({ notes: [], uniqueTags: [] }),
 };
 
 const slice = createSlice({
@@ -34,7 +34,7 @@ const slice = createSlice({
       state.tags = array;
     },
     addNoteToData: (state, action: PayloadAction<INote>) => {
-      if (action.payload.title.length !== 0) {
+      if (action.payload.title.trim().length !== 0) {
         state.data.unshift(action.payload);
         state.jsonData = JSON.stringify({
           notes: state.data,
@@ -87,8 +87,8 @@ const slice = createSlice({
       state.allUniqueTags = state.allUniqueTags.filter((tag) => tag !== action.payload);
       state.data.forEach((note) => {
         note.title = note.title
-          .split(' ')
-          .filter((el) => el !== action.payload)
+          .split(/(#[a-z\d-]+)/gi)
+          .map((el) => (el === action.payload ? el.slice(el.length, -1) : el))
           .join(' ');
         note.tag = note.tag.filter((tag) => tag !== action.payload);
       });
