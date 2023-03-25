@@ -5,12 +5,19 @@
   @include flex(row, space-evenly, start, nowrap);
   @include size(70%, 5vh);
   margin: 40px 0;
+  @media screen and (max-width: $small){
+    @include flex(row, space-around, start, nowrap);
+    @include size(90%, 3vh);
+  }
 
   & .searchInput {
     @include size(70%, none);
     padding: 10px;
     border: 1px solid lightgray;
     border-radius: 5px;
+    @media screen and (max-width: $small){
+      @include size(65%, none);
+    }
   }
 
   & .searchButton {
@@ -27,6 +34,9 @@
 
     & img {
       @include size(20px, 20px);
+      @media screen and (max-width: $small){
+        @include size(18px, 18px);
+      }
     }
   }
 }

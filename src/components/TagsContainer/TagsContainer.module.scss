@@ -14,10 +14,12 @@
     border-radius: 5px;
 
     & .tagDescription {
-      @include flex(row, space-between, center, nowrap);
+      @include flex(row, space-evenly, center, nowrap);
+      @media screen and (max-width: $small){
+        @include flex(row, space-around, center, nowrap);
+      }
 
       & .tagTitle {
-        margin: 2px 0;
         padding: 3px 8px;
         background-color: $lightGreen;
         border-radius: 5px;
@@ -33,6 +35,9 @@
 
         & img {
           @include size(20px, 20px);
+          @media screen and (max-width: $small){
+            @include size(18px, 18px);
+          }
         }
       }
     }

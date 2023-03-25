@@ -14,5 +14,11 @@
     background-color: $white;
     box-shadow: rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     border-radius: 5px;
+    @media screen and (max-width: $large) {
+      @include minSize(60%, 80vh)
+    }
+    @media screen and (max-width: $medium) {
+      @include minSize(80%, 80vh);
+    }
   }
 }

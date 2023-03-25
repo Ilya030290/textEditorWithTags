@@ -10,6 +10,9 @@
     padding: 10px;
     border: 1px solid lightgray;
     border-radius: 5px;
+    @media screen and (max-width: $small){
+      @include size(65%, 60%);
+    }
   }
 
   & .headerButton {
@@ -20,6 +23,10 @@
     border-radius: 5px;
     cursor: pointer;
     border: none;
+    @media screen and (max-width: $small){
+      @include size(17%, 65%);
+      font-size: 11px;
+    }
   }
 
   & .disabledButton {
