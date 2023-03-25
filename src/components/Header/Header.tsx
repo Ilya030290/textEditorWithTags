@@ -3,13 +3,14 @@ import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
 import { addNoteToData, setAllTags, setNoteText, setTagNote } from '../../redux/appSlice';
-import { selectTags, selectTextAreaValue } from '../../redux/selectors';
+import { selectJsonData, selectTextAreaValue } from '../../redux/selectors';
 import { INote, useAppDispatch } from '../../types/types';
 import styles from './Header.module.scss';
 
 const Header = () => {
+  const data = JSON.parse(useSelector(selectJsonData));
   const textAreaValue = useSelector(selectTextAreaValue);
-  const tags = useSelector(selectTags);
+  const currentTags = data.currentTags;
   const dispatch = useAppDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -21,7 +22,7 @@ const Header = () => {
     const newNote: INote = {
       id: uuidv4(),
       title: textAreaValue,
-      tag: Array.from(new Set(tags)),
+      noteTags: Array.from(new Set(currentTags)),
     };
 
     dispatch(addNoteToData(newNote));

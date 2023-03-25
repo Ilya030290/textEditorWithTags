@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { useAppDispatch } from '../../types/types';
+import { INote, useAppDispatch } from '../../types/types';
 import { editNote, removeNote, setAllTags, setTagNote } from '../../redux/appSlice';
-import { selectData } from '../../redux/selectors';
+import { selectJsonData } from '../../redux/selectors';
 import Note from './Note';
 import styles from './NotesList.module.scss';
 
 const NotesList = () => {
-  const data = useSelector(selectData);
+  const data = JSON.parse(useSelector(selectJsonData));
   const dispatch = useAppDispatch();
 
   const changeNoteText = (id: string, title: string) => {
@@ -24,8 +24,8 @@ const NotesList = () => {
 
   return (
     <section className={styles.notesListContainer}>
-      {data.length > 0
-        ? data.map((note) => (
+      {data.notes.length > 0
+        ? data.notes.map((note: INote) => (
             <Note
               key={note.id}
               note={note}

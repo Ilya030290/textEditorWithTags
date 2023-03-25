@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 
 import { useAppDispatch } from '../../types/types';
 import { searchByTagName, setTagValue } from '../../redux/appSlice';
-import { selectTagName } from '../../redux/selectors';
+import { selectTagValue } from '../../redux/selectors';
 import SearchIcon from '../../assets/free-icon-magnifier-2725317.png';
 import styles from './SearchBarByTag.module.scss';
 
 const SearchBarByTag = () => {
-  const tagName = useSelector(selectTagName);
+  const tagValue = useSelector(selectTagValue);
   const dispatch = useAppDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +16,7 @@ const SearchBarByTag = () => {
   };
 
   const searchByTag = () => {
-    dispatch(searchByTagName(tagName));
+    dispatch(searchByTagName(tagValue));
     dispatch(setTagValue(''));
   };
 
@@ -25,7 +25,7 @@ const SearchBarByTag = () => {
       <input
         className={styles.searchInput}
         placeholder="Search notes by tag"
-        value={tagName}
+        value={tagValue}
         onChange={handleChange}
       />
       <button className={styles.searchButton} onClick={searchByTag}>

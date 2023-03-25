@@ -1,14 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { useAppDispatch } from '../../types/types';
+import { IData, useAppDispatch } from '../../types/types';
 import { removeTag } from '../../redux/appSlice';
-import { selectAllUniqueTags } from '../../redux/selectors';
+import { selectJsonData } from '../../redux/selectors';
 import DeleteIcon from '../../assets/delete.png';
 import styles from './TagsContainer.module.scss';
 
 const TagsContainer = () => {
-  const allUniqueTags = useSelector(selectAllUniqueTags);
+  const data: IData = JSON.parse(useSelector(selectJsonData));
+  const allUniqueTags = data.uniqueTags;
   const dispatch = useAppDispatch();
 
   const deleteTag = (tag: string) => {

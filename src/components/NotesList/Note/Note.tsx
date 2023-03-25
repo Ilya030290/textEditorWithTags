@@ -15,8 +15,8 @@ const Note = ({ note, deleteNote, changeNoteText }: NoteProps) => {
         />
       </div>
       <div className={styles.tagGroup}>
-        {note.tag.length > 0
-          ? note.tag.map((el, index) => (
+        {note.noteTags.length > 0
+          ? note.noteTags.map((el, index) => (
               <span className={styles.tag} key={index}>
                 {el}
               </span>
