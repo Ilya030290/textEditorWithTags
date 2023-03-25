@@ -1,6 +1,4 @@
-import React from 'react';
-
-import noteStyles from '../components/NotesList/Note/Note.module.scss';
+import React, { Fragment } from 'react';
 
 export const getActiveWordsByTag = (title: string) => {
   const tagsArr: string[] = [];
@@ -13,17 +11,9 @@ export const getActiveWordsByTag = (title: string) => {
 
   const resultArr = title.split(' ').map((item, index) => {
     if (tagsArr.indexOf(item) !== -1) {
-      return (
-        <span className={noteStyles.activeSpan} key={index}>
-          {item}
-        </span>
-      );
+      return <span key={index}>&nbsp;{item}&nbsp;</span>;
     } else {
-      return (
-        <span className={noteStyles.span} key={index}>
-          {item}
-        </span>
-      );
+      return <Fragment key={index}>&nbsp;{item}&nbsp;</Fragment>;
     }
   });
 
