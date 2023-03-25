@@ -19,13 +19,8 @@
       font-weight: 500;
       font-size: medium;
 
-      & .activeSpan {
-        margin: 0 4px;
+      & span {
         background-color: $yellow;
-      }
-
-      & .span {
-        margin: 0 4px;
       }
     }
 
