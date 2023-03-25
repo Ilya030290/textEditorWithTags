@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 export const getActiveWordsByTag = (title: string) => {
   const tagsArr: string[] = [];
@@ -11,9 +11,9 @@ export const getActiveWordsByTag = (title: string) => {
 
   const resultArr = title.split(' ').map((item, index) => {
     if (tagsArr.indexOf(item) !== -1) {
-      return <span key={index}>&nbsp;{item}&nbsp;</span>;
+      return <em key={index}>&nbsp;{item}&nbsp;</em>;
     } else {
-      return <Fragment key={index}>&nbsp;{item}&nbsp;</Fragment>;
+      return <span key={index}>&nbsp;{item}&nbsp;</span>;
     }
   });
 
