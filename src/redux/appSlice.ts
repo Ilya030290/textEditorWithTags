@@ -1,15 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AppState, INote } from '../types/types';
+import { AppState, IData, INote } from '../types/types';
 import { AppReducer } from '../constants/constants';
 
 const initialState: AppState = {
   textAreaValue: '',
   searchTagValue: '',
-  data: [],
-  tags: [],
-  allUniqueTags: [],
-  jsonData: JSON.stringify({ notes: [], uniqueTags: [] }),
+  jsonData: JSON.stringify({ notes: [], currentTags: [], uniqueTags: [] }),
 };
 
 const slice = createSlice({
@@ -23,35 +20,39 @@ const slice = createSlice({
       state.searchTagValue = action.payload;
     },
     setTagNote: (state, action: PayloadAction<string>) => {
+      const data: IData = JSON.parse(state.jsonData);
       const arrOfStrings = action.payload.split(/(#[a-z\d-]+)/gi);
-      const array: string[] = [];
+      const arrWithCurrentTags: string[] = [];
 
       arrOfStrings.forEach((item) => {
         if (item.charAt(0) === '#') {
-          array.push(item);
+          arrWithCurrentTags.push(item);
         }
       });
-      state.tags = array;
+      data.currentTags = arrWithCurrentTags;
+      state.jsonData = JSON.stringify(data);
     },
     addNoteToData: (state, action: PayloadAction<INote>) => {
+      const data: IData = JSON.parse(state.jsonData);
+
       if (action.payload.title.trim().length !== 0) {
-        state.data.unshift(action.payload);
-        state.jsonData = JSON.stringify({
-          notes: state.data,
-          uniqueTags: state.allUniqueTags,
-        });
+        data.notes.unshift(action.payload);
       }
+      state.jsonData = JSON.stringify(data);
     },
     searchByTagName: (state, action: PayloadAction<string>) => {
-      const foundIndex = state.data.findIndex(
-        (el) => el.tag.indexOf(action.payload) !== -1
+      const data: IData = JSON.parse(state.jsonData);
+      const foundIndex = data.notes.findIndex(
+        (el) => el.noteTags.indexOf(action.payload) !== -1
       );
 
-      state.data.unshift(state.data[foundIndex]);
-      state.data.splice(foundIndex + 1, 1);
+      data.notes.unshift(data.notes[foundIndex]);
+      data.notes.splice(foundIndex + 1, 1);
+      state.jsonData = JSON.stringify(data);
     },
     editNote: (state, action: PayloadAction<{ id: string; title: string }>) => {
-      const foundNote = state.data.find((note) => note.id === action.payload.id);
+      const data: IData = JSON.parse(state.jsonData);
+      const foundNote = data.notes.find((note) => note.id === action.payload.id);
 
       if (foundNote) {
         const arrOfStrings = action.payload.title.split(/(#[a-z\d-]+)/gi);
@@ -62,36 +63,37 @@ const slice = createSlice({
             array.push(item);
           }
         });
-        foundNote.tag = Array.from(new Set(array));
+        foundNote.noteTags = Array.from(new Set(array));
         foundNote.title = action.payload.title;
       }
-      state.jsonData = JSON.stringify({
-        notes: state.data,
-        uniqueTags: state.allUniqueTags,
-      });
+      state.jsonData = JSON.stringify(data);
     },
     setAllTags: (state) => {
+      const data: IData = JSON.parse(state.jsonData);
       const newArr: string[] = [];
 
-      state.data.forEach((note) => note.tag.forEach((tag) => newArr.push(tag)));
-      state.allUniqueTags = Array.from(new Set(newArr));
+      data.notes.forEach((note) => note.noteTags.forEach((tag) => newArr.push(tag)));
+      data.uniqueTags = Array.from(new Set(newArr));
+      state.jsonData = JSON.stringify(data);
     },
     removeNote: (state, action: PayloadAction<string>) => {
-      state.data = state.data.filter((el) => el.id !== action.payload);
-      state.jsonData = JSON.stringify({
-        notes: state.data,
-        uniqueTags: state.allUniqueTags,
-      });
+      const data: IData = JSON.parse(state.jsonData);
+
+      data.notes = data.notes.filter((el) => el.id !== action.payload);
+      state.jsonData = JSON.stringify(data);
     },
     removeTag: (state, action: PayloadAction<string>) => {
-      state.allUniqueTags = state.allUniqueTags.filter((tag) => tag !== action.payload);
-      state.data.forEach((note) => {
+      const data: IData = JSON.parse(state.jsonData);
+
+      data.uniqueTags = data.uniqueTags.filter((tag) => tag !== action.payload);
+      data.notes.forEach((note) => {
         note.title = note.title
           .split(/(#[a-z\d-]+)/gi)
           .map((el) => (el === action.payload ? el.slice(el.length, -1) : el))
           .join(' ');
-        note.tag = note.tag.filter((tag) => tag !== action.payload);
+        note.noteTags = note.noteTags.filter((tag) => tag !== action.payload);
       });
+      state.jsonData = JSON.stringify(data);
     },
   },
 });
