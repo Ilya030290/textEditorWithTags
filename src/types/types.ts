@@ -15,16 +15,19 @@ export const useAppDispatch = () => useDispatch<DispatchActionType>();
 export interface AppState {
   textAreaValue: string;
   searchTagValue: string;
-  data: INote[];
-  tags: string[];
-  allUniqueTags: string[];
   jsonData: string;
+}
+
+export interface IData {
+  notes: INote[];
+  currentTags: string[];
+  uniqueTags: string[];
 }
 
 export interface INote {
   id: string;
   title: string;
-  tag: string[];
+  noteTags: string[];
 }
 export type NoteProps = {
   note: INote;
